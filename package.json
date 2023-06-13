@@ -1,14 +1,17 @@
 {
-  "name": "cele",
+  "name": "celer",
   "version": "1.0.0",
-  "description": "Like Uber but for things",
+  "description": "A on demand transportation service",
   "main": "server.js",
   "scripts": {
-    "test": "nodemon server.js"
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "nodemon dist/server.js"
   },
   "repository": {
     "type": "git",
-    "url": "y"
+    "url": "https://www.github.com/Dlurak/celerBackend.git"
   },
   "author": "Dlurak",
   "license": "GPL-2.0",
@@ -21,6 +24,9 @@
     "mongodb": "^5.6.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "@types/express": "^4.17.17",
+    "@types/express-session": "^1.17.7",
+    "nodemon": "^2.0.22",
+    "typescript": "^5.1.3"
   }
 }

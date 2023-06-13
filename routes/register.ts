@@ -1,14 +1,14 @@
-const express = require('express');
+import express, { Request, Response } from 'express';
 const router = express.Router();
 const fs = require('fs');
 const config = JSON.parse(fs.readFileSync('config.json'));
 const database = require('../database');
 
-router.get('/', (req, res) => {
+router.get('/', (req: Request, res: Response) => {
     res.render('register');
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req: Request, res: Response) => {
     const requestBody = req.body;
 
     if (requestBody.password !== requestBody.passwordRepeat) { // check if passwords match
@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
             message: 'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character'
         });
     } else { // add user to database
-        database.addUser(requestBody.username, requestBody.password).then((response) => {
+        database.addUser(requestBody.username, requestBody.password).then((response: string) => {
             switch (response) {
                 case 'success':
                     res.status(200).json({ message: 'User added successfully' });

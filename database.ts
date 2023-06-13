@@ -1,6 +1,7 @@
 const mongodb = require('mongodb');
 const bcrypt = require('bcrypt');
-const config = require('./config.json');
+import { config } from './config';
+import { User } from './interfaces/user';
 
 
 
@@ -10,11 +11,11 @@ const client = new mongodb.MongoClient(
 );
 const db = client.db('celer');
 
-async function findUser(username) {
+async function findUser(username: string): Promise<User> {
     return await db.collection('users').findOne({ _id: username });
 }
 
-async function addUser(username, passwordClearString) {
+export async function addUser(username: string, passwordClearString: string): Promise<string> {
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(passwordClearString, saltRounds);
 
@@ -30,7 +31,7 @@ async function addUser(username, passwordClearString) {
             createdAt: new Date().getTime()
         }).then(() => {
             resolve('success');
-        }).catch((error) => {
+        }).catch((error: Error) => {
             console.error(error);
             reject('error');
         }
@@ -39,7 +40,7 @@ async function addUser(username, passwordClearString) {
 
 }
 
-async function checkPasswordUsernameCombination(username, passwordClearString) {
+export async function checkPasswordUsernameCombination(username: string, passwordClearString: string) {
     const user = await findUser(username);
 
     if (!user) { // user does not exist
@@ -57,8 +58,4 @@ process.on('SIGINT', () => {
     });
 });
 
-module.exports = {
-    addUser: addUser,
-    checkPasswordUsernameCombination: checkPasswordUsernameCombination,
-    client: client
-};
+

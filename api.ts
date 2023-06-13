@@ -1,7 +1,6 @@
-const express = require('express');
-const session = require('express-session');
-const fs = require('fs');
-const config = JSON.parse(fs.readFileSync('config.json'));
+import express, { Request, Response } from 'express';
+import session = require('express-session');
+import { config } from './config';
 
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
@@ -31,7 +30,7 @@ app.listen(3000, () => {
 });
 
 
-app.route('/').get((req, res) => {
+app.route('/').get((req: Request, res: Response) => {
     res.render('index');
 });
 
