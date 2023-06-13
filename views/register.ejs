@@ -1,0 +1,18 @@
+<h1>Register now</h1>
+
+<form action="/register" method="POST">
+    <div>
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Enter your username" required>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter your password" required>
+    </div>
+    <div>
+        <label for="passwordRepeat">Confirm Password</label>
+        <input type="password" name="passwordRepeat" id="passwordRepeat" placeholder="Confirm your password" required>
+    </div>
+    <button type="submit">Register</button>
+</form>
+<p>When you already have an account you can <a href="/login">login</a></p>
