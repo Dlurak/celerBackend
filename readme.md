@@ -8,7 +8,7 @@ This is the backend for the Celer app. It's a REST API built with Node.js, Expre
 
 1. Clone the repo
    ```sh
-   git clone
+   git clone https://github.com/Dlurak/celerBackend.git
    ```
 2. Install NPM packages
     ```sh
@@ -36,10 +36,3 @@ This is the backend for the Celer app. It's a REST API built with Node.js, Expre
     ```
 2. The server will be running on [port 300](http://127.0.0.1:3000). You can change this in the `server.js` file. 
 3. Documentation for the API can be found [here](documentation.md)
-
----
-
-## License
-
-Distributed under the GPL-2.0 License. See `LICENSE` for more information.
-
