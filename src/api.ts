@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import session = require('express-session');
 import { config } from './config';
+import path from 'path';
 
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
@@ -11,6 +12,7 @@ const app = express();
 
 
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
     secret: config.sessionSecret,

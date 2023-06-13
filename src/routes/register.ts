@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 const router = express.Router();
 const fs = require('fs');
-const config = JSON.parse(fs.readFileSync('config.json'));
+import { config } from '../config';
 const database = require('../database');
 
 router.get('/', (req: Request, res: Response) => {
