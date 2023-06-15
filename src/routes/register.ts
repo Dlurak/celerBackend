@@ -2,7 +2,8 @@ import express, { Request, Response } from 'express';
 const router = express.Router();
 const fs = require('fs');
 import { config } from '../config';
-const database = require('../database');
+const database = require('../database/users');
+import { db } from '../database/database';
 
 router.get('/', (req: Request, res: Response) => {
     res.render('register');
@@ -19,7 +20,7 @@ router.post('/', (req: Request, res: Response) => {
             message: 'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character'
         });
     } else { // add user to database
-        database.addUser(requestBody.username, requestBody.password).then((response: string) => {
+        database.addUser(requestBody.username, requestBody.password, db).then((response: string) => {
             switch (response) {
                 case 'success':
                     res.status(200).json({ message: 'User added successfully' });
