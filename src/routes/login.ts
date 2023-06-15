@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express';
-import { User } from '../interfaces/user';
 import database = require('../database/users');
 import { Session } from 'express-session';
 import { db } from '../database/database';
@@ -21,13 +20,13 @@ router.post('/', async (req: Request, res: Response) => {
         return;
     }
 
-    const userExists = await database.doesUserExist(username, db);
+    const userExists = await database.doesUsernameExist(username, db);
     if (!userExists) {
         await new Promise(resolve => setTimeout(resolve, Math.random() * 1000)); // wait random time to prevent timing attacks
         res.status(401).json({ error: 'Wrong credentials' });
         return;
     }
-    
+
     database.checkPasswordUsernameCombination(username, password, db).then((correct: boolean) => {
         if (correct) {
             session.loggedIn = true;
