@@ -2,13 +2,13 @@
   "name": "celer",
   "version": "1.0.0",
   "description": "A on demand transportation service",
-  "main": "server.js",
+  "main": "api.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "node dist/api.js",
     "build": "tsc && cp src/config.json dist && cp -r src/views dist",
     "run": "npm run build && npm run start",
     "watch": "tsc --watch",
-    "dev": "nodemon dist/server.js"
+    "dev": "nodemon dist/api.js"
   },
   "repository": {
     "type": "git",

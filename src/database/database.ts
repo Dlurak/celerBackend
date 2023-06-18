@@ -1,7 +1,9 @@
 const mongodb = require('mongodb');
 import { config } from '../config';
 
-
+/**
+ * The database connection
+ */
 const client = new mongodb.MongoClient(
     `mongodb+srv://${config.mongoDbUser}:${config.mongoDbPassword}@celer.zog6iqk.mongodb.net/?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true }

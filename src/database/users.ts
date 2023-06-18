@@ -16,16 +16,35 @@ export async function findUsers(user: UserSearchOptions, db: Db): Promise<User[]
     return users;
 }
 
+/**
+ * A function to check whether a username exists in the database
+ * @param username The username to check
+ * @param db The database to check in
+ * @returns A promise containing a boolean indicating whether the username exists
+ */
 export async function doesUsernameExist(username: string, db: Db): Promise<boolean> {
     const user = await db.collection('users').findOne({ username: username });
     return user !== null;
 }
 
+/**
+ * A function to check whether a user id exists in the database
+ * @param id The id to check
+ * @param db The database to check in
+ * @returns A promise containing a boolean indicating whether the id exists
+ */
 export async function doesUserIdExist(id: ObjectId, db: Db): Promise<boolean> {
     const user = await db.collection('users').findOne({ _id: id });
     return user !== null;
 }
 
+/**
+ * A function to add a user to the database
+ * @param username The username of the user to add
+ * @param passwordClearString The unhased password of the user to add
+ * @param db The database to add the user to
+ * @returns A promise containing a string indicating whether the user was added successfully
+ */
 export async function addUser(username: string, passwordClearString: string, db: Db): Promise<"success" | "error" | "User already exists"> {
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(passwordClearString, saltRounds);
@@ -52,6 +71,13 @@ export async function addUser(username: string, passwordClearString: string, db:
 
 }
 
+/**
+ * A function to check whether a username and password combination is correct
+ * @param username The username of the user to check
+ * @param passwordClearString The unhased password of the user to check
+ * @param db The database to check in
+ * @returns A promise containing a boolean indicating whether the username and password combination is correct
+ */
 export async function checkPasswordUsernameCombination(username: string, passwordClearString: string, db: Db): Promise<boolean> {
     return findUsers({ username: username }, db).then((userList) => {
         const user = userList[0];
