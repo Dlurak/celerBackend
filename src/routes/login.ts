@@ -6,11 +6,6 @@ import { db } from '../database/database';
 const router = express.Router();
 
 
-router.get('/', (req: Request, res: Response) => {
-    res.render('login');
-});
-
-
 router.post('/', async (req: Request, res: Response) => {
     const { username, password } = req.body;
     const session = req.session as Session;
@@ -38,5 +33,9 @@ router.post('/', async (req: Request, res: Response) => {
     });
 });
 
+
+router.all('/', (req: Request, res: Response) => {
+    res.status(405).json({ error: 'Method not allowed' });
+});
 
 module.exports = router;

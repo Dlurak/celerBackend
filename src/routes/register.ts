@@ -1,13 +1,9 @@
 import express, { Request, Response } from 'express';
 const router = express.Router();
-const fs = require('fs');
 import { config } from '../config';
 const database = require('../database/users');
 import { db } from '../database/database';
 
-router.get('/', (req: Request, res: Response) => {
-    res.render('register');
-});
 
 router.post('/', (req: Request, res: Response) => {
     const requestBody = req.body;
@@ -36,6 +32,10 @@ router.post('/', (req: Request, res: Response) => {
             }
         });
     }
+});
+
+router.all('/', (req: Request, res: Response) => {
+    res.status(405).json({ error: 'Method not allowed' });
 });
 
 module.exports = router;
