@@ -70,11 +70,13 @@ If the combination is correct, the server will respond with a 200 OK  and the fo
 
 ```json
 {
-    "message": "You are logged in"
+    "message": "You are logged in",
+    "username": "username",
+    "sessionCookie": "sessionCookie",
+    "sessionID": "sessionID"
 }
 ```
 
-It will create a session cookie that expires after 24 hours.
 
 ### Logout
 
