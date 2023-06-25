@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import database = require('../database/users');
 import { Session } from 'express-session';
 import { db } from '../database/database';
+import { addSession } from '../database/sessions';
 
 const router = express.Router();
 
@@ -26,7 +27,21 @@ router.post('/', async (req: Request, res: Response) => {
         if (correct) {
             session.loggedIn = true;
             session.username = username;
-            res.status(200).json({ message: 'You are logged in' });
+            session.cookie.expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // 1 week
+            session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7; // 1 week
+            session.cookie.httpOnly = true;
+
+
+            addSession(session, db).then((result) => {
+                console.log(result);
+            });
+
+            res.status(200).json({
+                message: 'You are logged in',
+                username: username,
+                sessionCookie: session.cookie,
+                sessionID: session.id
+            });
         } else {
             res.status(401).json({ error: 'Wrong credentials' });
         }
