@@ -13,7 +13,7 @@ router.post('/', (req: Request, res: Response) => {
     } else if (!requestBody.password.match(new RegExp(config.passwordRegex))) { // match a secure password
         res.status(400).json({
             error: "Password isn't secure enough",
-            message: 'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character'
+            message: `Password must match the following regex: ${config.passwordRegex}`
         });
     } else { // add user to database
         database.addUser(requestBody.username, requestBody.password, db).then((response: string) => {

@@ -38,6 +38,6 @@ app.listen(3000, () => {
 });
 
 
-app.route('/').get((req: Request, res: Response) => {
-    res.render('index');
+app.route('/').all((req: Request, res: Response) => {
+    res.status(404).json({ error: 'Not found' });
 });
