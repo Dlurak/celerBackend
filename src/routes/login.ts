@@ -1,15 +1,13 @@
 import express, { Request, Response } from 'express';
 import database = require('../database/users');
-import { Session } from 'express-session';
+import { generateToken } from '../utils/auth';
 import { db } from '../database/database';
-import { addSession } from '../database/sessions';
 
 const router = express.Router();
 
 
 router.post('/', async (req: Request, res: Response) => {
     const { username, password } = req.body;
-    const session = req.session as Session;
 
     if (!username || !password) {
         res.status(400).json({ error: 'Missing credentials' });
@@ -25,22 +23,13 @@ router.post('/', async (req: Request, res: Response) => {
 
     database.checkPasswordUsernameCombination(username, password, db).then((correct: boolean) => {
         if (correct) {
-            session.loggedIn = true;
-            session.username = username;
-            session.cookie.expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // 1 week
-            session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7; // 1 week
-            session.cookie.httpOnly = true;
-
-
-            addSession(session, db).then((result) => {
-                console.log(result);
-            });
+            
+            const token = generateToken(username);
 
             res.status(200).json({
                 message: 'You are logged in',
                 username: username,
-                sessionCookie: session.cookie,
-                sessionID: session.id
+                token: token
             });
         } else {
             res.status(401).json({ error: 'Wrong credentials' });

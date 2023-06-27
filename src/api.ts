@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express';
-import session = require('express-session');
 import { config } from './config';
 import path from 'path';
 import cors from 'cors';
@@ -17,12 +16,6 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: false }));
-app.use(session({
-    secret: config.sessionSecret,
-    resave: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 1 day
-    saveUninitialized: false
-}));
 app.use(cors());
 app.use(bodyParser.json());
 

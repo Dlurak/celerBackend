@@ -47,23 +47,3 @@ async function validateRideRequestOptions(options: RideRequest): Promise<[boolea
 
     return [true, ""];
 }
-
-
-////// TESTS //////
-
-async function ride() {
-    addRideRequest({
-        _id: new ObjectId(),
-        requestor: (await findUsers({"username": "user1"}, db))[0]._id,
-        startLocation: [0, 0],
-        destinationLocation: [1, 0],
-        createdAt: Math.floor(Date.now() / 1000),
-        status: "open",
-        cargoWeight: 0,
-        cargoVolume: 0,
-        cargoDescription: "",
-        cargoSpecialCharacteristics: "none"
-    });
-}
-
-ride();

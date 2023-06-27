@@ -5,7 +5,7 @@
   "main": "api.js",
   "scripts": {
     "start": "node dist/api.js",
-    "build": "tsc && cp src/config.json dist && cp -r src/views dist",
+    "build": "tsc && cp src/config.json dist",
     "run": "npm run build && npm run start",
     "watch": "tsc --watch",
     "dev": "nodemon dist/api.js"
@@ -21,15 +21,18 @@
     "body-parser": "^1.20.2",
     "connect-mongo": "^5.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.6.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/express-session": "^1.17.7",
+    "@types/jsonwebtoken": "^9.0.2",
     "nodemon": "^2.0.22",
     "typescript": "^5.1.3"
   }
