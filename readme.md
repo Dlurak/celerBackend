@@ -19,12 +19,17 @@ This is the backend for the Celer app. It's a REST API built with Node.js, Expre
     {
         "mongoDbPassword": "",
         "mongoDbUser": "",
-        "passwordRegex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-        "sessionSecret": "",
+        "passwordRegex": "^(?=.*[.,'#+*`´^°!\"§$%&/\\(){}@öäüÖÄÜß²³~])(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{12,}$"
     }
     ```
 
-    The *mongoDbPassword* and *mongoDbUser* are the credentials for your MongoDB database. The *passwordRegex* is the regex used to validate passwords. The *sessionSecret* is the secret used to sign the session cookie, it can be any string.
+    The *mongoDbPassword* and *mongoDbUser* are the credentials for your MongoDB database. The *passwordRegex* is the regex used to validate passwords.
+
+4. Create a `.env` file and add this:
+    ```env
+    JWT_SECRET=
+    ```
+    The *JWT_SECRET* is the secret used to sign the JSON Web Tokens. You can use any string you want, but it should be long and random.
 
 ---
 

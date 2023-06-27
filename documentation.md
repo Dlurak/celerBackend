@@ -72,13 +72,15 @@ If the combination is correct, the server will respond with a 200 OK  and the fo
 {
     "message": "You are logged in",
     "username": "username",
-    "sessionCookie": "sessionCookie",
-    "sessionID": "sessionID"
+    "token": "token"
 }
 ```
+The token is a JSON Web Token that is used to authenticate the user *currently this is still work in progress*. The Token is valid for 1 hour and the content is the username of the user.
 
 
 ### Logout
+
+**This will not work right now due to the change from sessions to JSON Web Tokens**
 
 To logout you can send a POST request to `/logout`. It will delete the session cookie and respond with a 200 OK and the following body:
 
