@@ -13,17 +13,14 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
 
     }
 
-    try {
-        const decoded = jwt.verify(token, (process.env.JWT_SECRET as string)) as JWTPayload;
-        console.table({
-            'decoded': decoded,
-            'Originated from':'src/middleware/auth.ts:19'
-        });
+    jwt.verify(token, (process.env.JWT_SECRET as string), (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ error: 'Invalid token' });
+        }
+
         res.locals.jwtPayload = decoded;
         next();
-    } catch (err) {
-        res.status(401).json({ error: 'Invalid token' });
-    }
+    });
 };
 
 export default authenticate;

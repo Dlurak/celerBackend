@@ -14,7 +14,7 @@ export function generateToken(username: string) {
     };
 
     const options = {
-        expiresIn: '2m'
+        expiresIn: '1h'
     };
 
     return jwt.sign(payload, process.env.JWT_SECRET, options);

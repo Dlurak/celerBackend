@@ -6,7 +6,6 @@ import bodyParser = require('body-parser');
 
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
-const logoutRouter = require('./routes/logout');
 const rideRequestRouter = require('./routes/rideRequest');
 
 
@@ -22,7 +21,6 @@ app.use(bodyParser.json());
 // define the routers
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
-app.use('/logout', logoutRouter);
 app.use('/rideRequest', rideRequestRouter);
 
 // start the server
