@@ -1,4 +1,3 @@
-import { ObjectId } from 'mongodb';
 import { db } from './database';
 import { RideRequest } from '../interfaces/rideRequest';
 import { doesUserIdExist, findUsers } from './users';
@@ -10,7 +9,7 @@ import { haversineDistance } from '../utils/distanceCalculator';
  * @param options The options for the ride request
  * @returns "Success" if the ride request was added successfully, "error" when the save failed, or a string describing the error if the options are invalid
  */
-async function addRideRequest(options: RideRequest): Promise<string> {
+export async function addRideRequest(options: RideRequest): Promise<string> {
     const [isValid, error] = await validateRideRequestOptions(options);
     if (!isValid) {
         return error;
@@ -47,3 +46,4 @@ async function validateRideRequestOptions(options: RideRequest): Promise<[boolea
 
     return [true, ""];
 }
+

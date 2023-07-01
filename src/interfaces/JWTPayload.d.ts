@@ -1,3 +1,0 @@
-interface JWTPayload {
-    username: string;
-}

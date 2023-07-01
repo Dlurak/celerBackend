@@ -1,6 +1,17 @@
 import { ObjectId } from "mongodb";
 
-interface RideRequest {
+export const cargoSpecialCharacteristicsArray = [
+    "fragile",
+    "flammable",
+    "explosive",
+    "living",
+    "none"
+] as const;
+
+
+export type cargoSpecialCharacteristics = typeof cargoSpecialCharacteristicsArray[number];
+
+export interface RideRequest {
     _id: ObjectId;
     requestor: ObjectId;
     startLocation: [number, number]; // [lat, lng]
@@ -11,7 +22,7 @@ interface RideRequest {
     cargoWeight: number; // in kg
     cargoVolume: number; // in liters
     cargoDescription: string; // a description of the cargo
-    cargoSpecialCharacteristics: "fragile"|"flammable"|"explosive"|"living"|"none";
+    cargoSpecialCharacteristics: cargoSpecialCharacteristics;
 
     acceptor?: ObjectId;
     acceptedAt?: number;

@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express';
-import { config } from './config';
 import path from 'path';
 import cors from 'cors';
 import bodyParser = require('body-parser');
