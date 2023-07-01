@@ -78,14 +78,42 @@ If the combination is correct, the server will respond with a 200 OK  and the fo
 The token is a JSON Web Token that is used to authenticate the user *currently this is still work in progress*. The Token is valid for 1 hour and the content is the username of the user.
 
 
-### Logout
+### Adding a ride Request
 
-**This will not work right now due to the change from sessions to JSON Web Tokens**
+To add a ride Request you can send a POST request to `/rideRequest` with the following body:
 
-To logout you can send a POST request to `/logout`. It will delete the session cookie and respond with a 200 OK and the following body:
 
 ```json
 {
-    "message": "You are logged out"
+    "startLocation": [0, 2.05],
+    "destinationLocation": [0, 2],
+    "cargoWeight": 1,
+    "cargoVolume": 1,
+    "cargoDescription": "description",
+    "cargoSpecialCharacteristics": ""
 }
-```	
+```
+
+`cargoSpecialCharacteristics` is optional and can be left out. If you leave it out, the server will asume no special characteristics. If you want to specify special characteristics, you can use the following values:
+- fragile
+- flamable
+- explosive
+- living
+- none
+
+There will be quite a lot of validation on the server side, so if you send invalid data, you will get a 400 Bad Request with one of the following error messages:
+
+| Error Message                             | Description                                                                  |
+| -------------------------------------     | ---------------------------------------------------------------------------- |
+| `requestor is blocked`                    | The user is blocked and can't add a ride request, this isn't implemented yet |
+| `start and destination are too close`     | The start and destination need to have a distance of at least 100 meters     |
+| `start and destination are too far apart` | The start and destination need to have a distance of at most 1000 kilometers |
+| `cargo weight can't be negative`          | The cargo weight needs to be positive                                        |
+| `cargo volume can't be negative`          | The cargo volume needs to be positive                                        |
+
+When you use wrong types or do not send required fields, you will get a 400 Bad Request with one of the following error messages:
+
+- `missing <key>`
+- `<key> must be of type <type>` 
+- `<key> must have two elements` can only occur for `startLocation` and `destinationLocation`
+- `<key> must be an array of two numbers` can only occur for `startLocation` and `destinationLocation`

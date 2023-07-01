@@ -39,9 +39,9 @@ async function validateRideRequestOptions(options: RideRequest): Promise<[boolea
     } else if (haversineDistance(options.startLocation, options.destinationLocation) > 1000) {
         return [false, "start and destination are too far apart"];
     } else if (options.cargoWeight < 0) {
-        return [false, "cargo weight cannot be negative"];
+        return [false, "cargo weight can't be negative"];
     } else if (options.cargoVolume < 0) {
-        return [false, "cargo volume cannot be negative"];
+        return [false, "cargo volume can't be negative"];
     }
 
     return [true, ""];

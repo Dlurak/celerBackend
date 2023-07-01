@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 
 export const cargoSpecialCharacteristicsArray = [
     "fragile",
-    "flammable",
+    "flamable",
     "explosive",
     "living",
     "none"

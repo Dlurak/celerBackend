@@ -5,7 +5,6 @@ import { findUsers } from '../database/users';
 import { db } from '../database/database';
 import { ObjectId } from 'mongodb';
 import { RideRequest, cargoSpecialCharacteristics, cargoSpecialCharacteristicsArray } from '../interfaces/rideRequest';
-// import { RideRequest, cargoSpecialCharacteristics } from '../interfaces/rideRequest';
 
 
 const router = express.Router();
@@ -94,6 +93,10 @@ router.post('/', authenticate, async (req: Request, res: Response) => {
             res.status(400).json({ error: result});
             break;
     }
+});
+
+router.all('/', (req: Request, res: Response) => {
+    res.status(405).json({ error: 'method not allowed' });
 });
 
 module.exports = router;
