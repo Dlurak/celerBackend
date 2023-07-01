@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import path from 'path';
 import cors from 'cors';
 import bodyParser = require('body-parser');
+import { config } from './config'
 
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
@@ -23,8 +24,8 @@ app.use('/login', loginRouter);
 app.use('/rideRequest', rideRequestRouter);
 
 // start the server
-app.listen(3000, () => {
-    console.log('listening on 3000');
+app.listen(config.port, () => {
+    console.log(`listening on ${config.port}`);
 });
 
 

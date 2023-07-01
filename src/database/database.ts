@@ -1,11 +1,11 @@
 const mongodb = require('mongodb');
-import { config } from '../config';
+require('dotenv').config();
 
 /**
  * The database connection
  */
 const client = new mongodb.MongoClient(
-    `mongodb+srv://${config.mongoDbUser}:${config.mongoDbPassword}@celer.zog6iqk.mongodb.net/?retryWrites=true&w=majority`,
+    `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@celer.zog6iqk.mongodb.net/?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true }
 );
 const db = client.db('celer');
