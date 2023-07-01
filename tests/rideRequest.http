@@ -3,11 +3,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc
 Content-Type: application/json
 
 {
-    "startLocation": [12, 2],
-    "destinationLocation": [1, 2],
+    "startLocation": [0, 2.05],
+    "destinationLocation": [0, 2],
     "cargoWeight": 1,
     "cargoVolume": 1,
     "cargoDescription": "test",
-    "cargoSpecialCharacteristics": 2
+    "cargoSpecialCharacteristics": ""
 }
 

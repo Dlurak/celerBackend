@@ -21,8 +21,7 @@ router.post('/', authenticate, async (req: Request, res: Response) => {
         'cargoWeight': 'number',
         'cargoVolume': 'number',
         'cargoDescription': 'string'
-    }
-
+    };
 
     for (const key of Object.keys(requiredKeys)) {
         if (!reqBody.hasOwnProperty(key)) {
@@ -50,20 +49,6 @@ router.post('/', authenticate, async (req: Request, res: Response) => {
         }
     }
 
-    // check that the cargoSpecialCharacteristics is of type cargoSpecialCharacteristics
-    /* if (reqBody.hasOwnProperty('cargoSpecialCharacteristics')) {
-        const value = reqBody['cargoSpecialCharacteristics'];
-        if (typeof value !== 'string') {
-            res.status(400).json({ error: `cargoSpecialCharacteristics must be of type string` });
-            return;
-        } else {
-            console.log(value);
-            console.log(Object.values(cargoSpecialCharacteristics));
-        }
-    }
-    */
-
-    // extract the cargoSpecialCharacteristics into a array from the type
     
     let cargoSpecialCharacteristicsValues: cargoSpecialCharacteristics;
     if (reqBody.hasOwnProperty('cargoSpecialCharacteristics')) {
@@ -97,9 +82,18 @@ router.post('/', authenticate, async (req: Request, res: Response) => {
         cargoSpecialCharacteristics: cargoSpecialCharacteristicsValues
     };
 
-    res.status(200).json(options);
-
-    // const result = await addRideRequest(options);
+    const result = await addRideRequest(options);
+    switch (result) {
+        case 'error':
+            res.status(500).json({ error: 'error adding ride request' });
+            break;
+        case 'success':
+            res.status(200).json({ success: 'ride request added' });
+            break;
+        default:
+            res.status(400).json({ error: result});
+            break;
+    }
 });
 
 module.exports = router;
