@@ -14,22 +14,14 @@ This is the backend for the Celer app. It's a REST API built with Node.js, Expre
     ```sh
     npm i
     ```
-3. Create a `config.json` file and add this:
-    ```json
-    {
-        "mongoDbPassword": "",
-        "mongoDbUser": "",
-        "passwordRegex": "^(?=.*[.,'#+*`´^°!\"§$%&/\\(){}@öäüÖÄÜß²³~])(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{12,}$"
-    }
-    ```
 
-    The *mongoDbPassword* and *mongoDbUser* are the credentials for your MongoDB database. The *passwordRegex* is the regex used to validate passwords.
-
-4. Create a `.env` file and add this:
+3. Create a `.env` file and add this:
     ```env
     JWT_SECRET=
+    MONGODB_USERNAME=
+    MONGODB_PASSWORD=
     ```
-    The *JWT_SECRET* is the secret used to sign the JSON Web Tokens. You can use any string you want, but it should be long and random.
+    The *JWT_SECRET* is the secret used to sign the JSON Web Tokens. You can use any string you want, but it should be long and random. For the *MONGODB_USERNAME* and *MONGODB_PASSWORD*, you should use the username and password for the MongoDB database. You can create a free MongoDB database [here](https://www.mongodb.com/try).
 
 ---
 
