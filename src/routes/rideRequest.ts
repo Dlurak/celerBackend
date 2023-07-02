@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import authenticate from '../middleware/auth';
-import { addRideRequest } from '../database/rideRequest';
+import { addRideRequest, getRideRequests } from '../database/rideRequest';
 import { findUsers } from '../database/users';
 import { db } from '../database/database';
 import { ObjectId } from 'mongodb';
@@ -9,12 +9,18 @@ import { RideRequest, cargoSpecialCharacteristics, cargoSpecialCharacteristicsAr
 
 const router = express.Router();
 
-router.post('/', authenticate, async (req: Request, res: Response) => {
+router.use(authenticate)
+
+router.get('/', async (req: Request, res: Response) => {
+    res.status(200).json(await getRideRequests());
+});
+
+router.post('/', async (req: Request, res: Response) => {
     const reqBody = req.body;
     const userID = (await findUsers({ username: res.locals.jwtPayload.username }, db))[0]._id;
 
 
-    const requiredKeys: { [key: string]: "string"|"object"|"number" } = {
+    const requiredKeys: { [key: string]: "string" | "object" | "number" } = {
         'startLocation': 'object', // sadly arrays are objects in js
         'destinationLocation': 'object',
         'cargoWeight': 'number',
@@ -48,7 +54,7 @@ router.post('/', authenticate, async (req: Request, res: Response) => {
         }
     }
 
-    
+
     let cargoSpecialCharacteristicsValues: cargoSpecialCharacteristics;
     if (reqBody.hasOwnProperty('cargoSpecialCharacteristics')) {
         // check that it is a string
@@ -90,7 +96,7 @@ router.post('/', authenticate, async (req: Request, res: Response) => {
             res.status(200).json({ success: 'ride request added' });
             break;
         default:
-            res.status(400).json({ error: result});
+            res.status(400).json({ error: result });
             break;
     }
 });

@@ -47,3 +47,12 @@ async function validateRideRequestOptions(options: RideRequest): Promise<[boolea
     return [true, ""];
 }
 
+/**
+ * A function to get all ride requests in the database
+ * In the future this will need seach filters and pagination
+ * @returns A promise that resolves to an array of all ride requests in the database
+ */
+export function getRideRequests(): Promise<RideRequest[]> {
+    return db.collection('requestedRides').find().toArray();
+}
+
