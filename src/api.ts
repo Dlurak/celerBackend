@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express';
-import path from 'path';
 import cors from 'cors';
 import bodyParser = require('body-parser');
 import { config } from './config'
@@ -12,8 +11,6 @@ const rideRequestRouter = require('./routes/rideRequest');
 const app = express();
 
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(bodyParser.json());

@@ -36,5 +36,5 @@ This is the backend for the Celer app. It's a REST API built with Node.js, Expre
     npm run start
     ```
     Alternatively, you can use `npm run run` to compile and start the server in one command.
-2. The server will be running on [port 300](http://127.0.0.1:3000). You can change this in the `server.js` file. 
+2. The server will be running on [port 300](http://127.0.0.1:3000). You can change this in the `src/config.json` file. 
 3. Documentation for the API can be found [here](documentation.md)
