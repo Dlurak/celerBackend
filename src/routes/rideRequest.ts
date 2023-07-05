@@ -25,7 +25,8 @@ router.post('/', async (req: Request, res: Response) => {
         'destinationLocation': 'object',
         'cargoWeight': 'number',
         'cargoVolume': 'number',
-        'cargoDescription': 'string'
+        'cargoDescription': 'string',
+        'title': 'string'
     };
 
     for (const key of Object.keys(requiredKeys)) {
@@ -55,23 +56,23 @@ router.post('/', async (req: Request, res: Response) => {
     }
 
 
-    let cargoSpecialCharacteristicsValues: cargoSpecialCharacteristics;
+    let cargoSpecialCharacteristicsValues: cargoSpecialCharacteristics[];
+
     if (reqBody.hasOwnProperty('cargoSpecialCharacteristics')) {
-        // check that it is a string
         const value = reqBody['cargoSpecialCharacteristics'];
-        if (typeof value !== 'string') {
-            res.status(400).json({ error: `cargoSpecialCharacteristics must be of type string` });
+        if (!Array.isArray(value)) {
+            res.status(400).json({ error: `cargoSpecialCharacteristics must be an array` });
             return;
-        } else if (value === '') {
-            cargoSpecialCharacteristicsValues = "none";
-        } else if (!cargoSpecialCharacteristicsArray.includes(value as cargoSpecialCharacteristics)) {
-            res.status(400).json({ error: `cargoSpecialCharacteristics must be one of ${cargoSpecialCharacteristicsArray}` });
-            return;
-        } else {
-            cargoSpecialCharacteristicsValues = value as cargoSpecialCharacteristics;
         }
+        for (const characteristic of value) {
+            if (!cargoSpecialCharacteristicsArray.includes(characteristic)) {
+                res.status(400).json({ error: `"${characteristic}" is not a valid cargoSpecialCharacteristic` });
+                return;
+            }
+        }
+        cargoSpecialCharacteristicsValues = value.filter((item: cargoSpecialCharacteristics, index: number) => value.indexOf(item) === index);
     } else {
-        cargoSpecialCharacteristicsValues = "none";
+        cargoSpecialCharacteristicsValues = ["none"];
     }
 
     const options: RideRequest = {
@@ -81,6 +82,7 @@ router.post('/', async (req: Request, res: Response) => {
         destinationLocation: reqBody.destinationLocation,
         createdAt: Date.now(),
         status: 'open',
+        title: reqBody.title,
         cargoWeight: reqBody.cargoWeight,
         cargoVolume: reqBody.cargoVolume,
         cargoDescription: reqBody.cargoDescription,

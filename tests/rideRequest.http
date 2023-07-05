@@ -1,3 +1,4 @@
 GET http://127.0.0.1:3000/rideRequest
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2ODg1NzQ3MDMsImV4cCI6MTY4ODU3ODMwM30.MQ-SMHc6bRhk5QyYPTPzAfLDn3jRmzgqj1sqI0XiePQ
 Content-Type: application/json
 

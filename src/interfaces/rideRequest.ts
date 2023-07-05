@@ -18,11 +18,12 @@ export interface RideRequest {
     destinationLocation: [number, number]; // [lat, lng]
     createdAt: number;
     status: "open"|"accepted"|"completed"|"processing"|"rejected";
+    title: string;
 
     cargoWeight: number; // in kg
     cargoVolume: number; // in liters
     cargoDescription: string; // a description of the cargo
-    cargoSpecialCharacteristics: cargoSpecialCharacteristics;
+    cargoSpecialCharacteristics: cargoSpecialCharacteristics[];
 
     acceptor?: ObjectId;
     acceptedAt?: number;
