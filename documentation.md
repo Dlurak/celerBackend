@@ -89,12 +89,13 @@ To add a ride Request you can send a POST request to `/rideRequest` with the fol
     "destinationLocation": [0, 2],
     "cargoWeight": 1,
     "cargoVolume": 1,
-    "cargoDescription": "description",
-    "cargoSpecialCharacteristics": ""
+    "cargoDescription": "A 65 inch TV from Samsung",
+    "cargoSpecialCharacteristics": ["fragile", "flamable"],
+    "title": "TV"
 }
 ```
 
-`cargoSpecialCharacteristics` is optional and can be left out. If you leave it out, the server will asume no special characteristics. If you want to specify special characteristics, you can use the following values:
+`cargoSpecialCharacteristics` is optional and can be left out. If you leave it out, the server will asume no special characteristics. If you want to specify special characteristics, you can use the following values, duplicates will be ignored:
 - fragile
 - flamable
 - explosive
@@ -117,3 +118,9 @@ When you use wrong types or do not send required fields, you will get a 400 Bad 
 - `<key> must be of type <type>` 
 - `<key> must have two elements` can only occur for `startLocation` and `destinationLocation`
 - `<key> must be an array of two numbers` can only occur for `startLocation` and `destinationLocation`
+
+
+### Getting all ride requests
+
+This will use options and pegination in the future, so keep in mind that this is going to change in the near future.
+Send a GET `/rideRequest` to get all ride requests. The server will respond with a 200 OK and a list of objects.
