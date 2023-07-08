@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 // define the routers
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
-app.use('/rideRequest', rideRequestRouter);
+app.use('/rideRequests?', rideRequestRouter);
 
 // start the server
 app.listen(config.port, () => {

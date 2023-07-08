@@ -1,13 +1,4 @@
-POST http://127.0.0.1:3000/rideRequest
+PUT http://127.0.0.1:3000/rideRequests/all
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2ODg4MTA4MDUsImV4cCI6MTY4ODgxNDQwNX0.iI0765ZB2WB_HI-AiHv_NeNsefjvBDmVNleEEx8ur2M
 Content-Type: application/json
 
-{
-    "startLocation": [1.005, 2],
-    "destinationLocation": [1, 2],
-    "cargoWeight": 1,
-    "cargoVolume": 1,
-    "cargoDescription": "test",
-    "cargoSpecialCharacteristics": ["living"],
-    "title": "test"
-}
