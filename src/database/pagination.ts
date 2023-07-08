@@ -1,5 +1,4 @@
 import { Collection, SortDirection } from "mongodb";
-import { db } from "./database";
 
 /**
  * A function that returns a paginated list of data from a MongoDB collection
@@ -10,7 +9,7 @@ import { db } from "./database";
  * @param sortOrder In which order to sort the data, defaults to 1
  * @returns Promise<any[]> A promise that resolves to an array of data
  */
-function getPaginatedData(
+export function getPaginatedData(
     collection: Collection,
     pageNumber: number,
     pageSize: number,
@@ -36,4 +35,3 @@ function getPaginatedData(
         .limit(pageSize)
         .toArray()
 }
-
