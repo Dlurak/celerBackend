@@ -29,8 +29,14 @@ async function validateRideRequestOptions(options: RideRequest): Promise<[boolea
     if (!doesUserIdExist(options.requestor, db)) {
         return [false, "requestor does not exist"];
     }
+    console.log(options.requestor);
     const userList = await findUsers({ _id: options.requestor }, db);
     const user = userList[0];
+
+    console.table({
+        user,
+        userList
+    });
 
     if (user.blocked) {
         return [false, "requestor is blocked"];
@@ -52,7 +58,7 @@ async function validateRideRequestOptions(options: RideRequest): Promise<[boolea
  * In the future this will need seach filters and pagination
  * @returns A promise that resolves to an array of all ride requests in the database
  */
-export function getRideRequests(): Promise<RideRequest[]> {
+export function getRideRequests() {
     return db.collection('requestedRides').find().toArray();
 }
 
