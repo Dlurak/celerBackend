@@ -44,7 +44,7 @@ router.route('/')
 
         const paginatedData = await getPaginatedData(collection, page, pageSize);
 
-        res.status(502).json(paginatedData);
+        res.status(200).json(paginatedData);
     })
     .post(async (req: Request, res: Response) => {
         const reqBody = req.body;
