@@ -42,6 +42,9 @@ router.route('/')
             } else if (isNaN(valueParsedInt) && type === 'number') {
                 res.status(400).json({ error: `${key} must be of type ${type}` });
                 error = true;
+            } else if (type === 'number' && valueParsedInt <= 0) {
+                res.status(400).json({ error: `${key} must be greater than 0` });
+                error = true;
             }
         });
 
@@ -55,7 +58,10 @@ router.route('/')
 
         const paginatedData = await getPaginatedData(collection, page, pageSize);
 
-        res.status(200).json(paginatedData);
+        res.status(200).json({
+            data: paginatedData,
+            pageCount: Math.ceil((await collection.countDocuments()) / pageSize),
+        });
     })
     .post(async (req: Request, res: Response) => {
         const reqBody = req.body;
