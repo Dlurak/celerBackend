@@ -1,17 +1,4 @@
-POST http://127.0.0.1:3000/rideRequests/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2ODg4NDIwNjEsImV4cCI6MTY4ODg0NTY2MX0.ll_EXfZEd_5VL-xHxbewJU7WT1VA53TMvjodxiURC3A
+GET http://127.0.0.1:3000/rideRequests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2ODkwODEwNDYsImV4cCI6MTY4OTA4NDY0Nn0.UclKqRmYrRGKRNd3BJ-sh2OzDdbuG7Lhe8wJnvEr198
 Content-Type: application/json
 
-{
-    "startLocation": [
-	51.9225, 4.4792
-    ],
-    "destinationLocation": [
-			51.9725, 4.5292
-    ],
-    "cargoWeight": 75,
-    "cargoVolume": 400,
-    "cargoDescription": "A sofa",
-    "cargoSpecialCharacteristics": ["none"],
-    "title": "Sofa"
-}

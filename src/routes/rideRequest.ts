@@ -23,20 +23,31 @@ router.route('/')
             'pageSize': 'number'
         };
 
-        Object.entries(requiredKeys).forEach(entry => {
+
+        let error = false;
+        Object.entries(requiredKeys).forEach(async entry => {
+            if (error) {
+                return;
+            }
+
             const key = entry[0];
             const type = entry[1];
             const value = params[key] as string;
             const valueParsedInt = parseInt(value);
 
+
             if (!params.hasOwnProperty(key)) {
                 res.status(400).json({ error: `missing ${key}` });
-                return;
+                error = true;
             } else if (isNaN(valueParsedInt) && type === 'number') {
                 res.status(400).json({ error: `${key} must be of type ${type}` });
-                return;
+                error = true;
             }
         });
+
+        if (error) {
+            return;
+        }
 
         const page = parseInt(params.page as string);
         const pageSize = parseInt(params.pageSize as string);
